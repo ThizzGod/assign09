@@ -25,6 +25,9 @@ public class HashTable<K, V> implements Map<K, V>{
 	 */
 	public void clear() {
 		this.size = 0;
+		for(int i = 0; i < capacity; i++) {
+		   table.set(i, new LinkedList<MapEntry<K, V>>());
+		}
 	}
 
 	/**
@@ -36,7 +39,10 @@ public class HashTable<K, V> implements Map<K, V>{
 	 * @return true if this map contains the key, false otherwise
 	 */
 	public boolean containsKey(K key) {
-		return false;
+		if (this.get(key) == null) {
+			return false;
+		}
+		return true;
 	}
 
 	/**
@@ -74,6 +80,12 @@ public class HashTable<K, V> implements Map<K, V>{
 	 *         contains no mapping for the key
 	 */
 	public V get(K key) {
+		int position = key.hashCode() % capacity;
+		for (MapEntry<K, V> item : table.get(position)) {
+			if (item.getKey().equals(key)) {
+				return item.getValue();
+			}
+		}
 		return null;
 	}
 
@@ -85,6 +97,9 @@ public class HashTable<K, V> implements Map<K, V>{
 	 * @return true if this map contains no mappings, false otherwise
 	 */
 	public boolean isEmpty() {
+		if (size == 0) {
+			return true;
+		}
 		return false;
 	}
 
