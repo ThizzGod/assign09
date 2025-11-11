@@ -3,6 +3,10 @@ package assign09;
 import java.util.List;
 
 public class HashTable<K, V> implements Map<K, V>{
+	int size;
+	public HashTable() {
+		this.size = 0;
+	}
 	/**
 	 * Removes all mappings from this map.
 	 * 
