@@ -80,7 +80,7 @@ public class HashTable<K, V> implements Map<K, V>{
 	 *         contains no mapping for the key
 	 */
 	public V get(K key) {
-		int position = key.hashCode() % capacity;
+		int position = Math.abs(key.hashCode() % capacity);
 		for (MapEntry<K, V> item : table.get(position)) {
 			if (item.getKey().equals(key)) {
 				return item.getValue();
@@ -118,6 +118,24 @@ public class HashTable<K, V> implements Map<K, V>{
 	 *         mapping for key
 	 */
 	public V put(K key, V value) {
+		int position = Math.abs(key.hashCode() % capacity);
+		
+		if (this.containsKey(key)) {
+			for (MapEntry<K, V> item : table.get(position)) {
+				if (item.getKey().equals(key)) {
+					V previous = item.getValue();
+					item.setValue(value);
+					return previous;
+				}
+			}
+		}
+		
+		table.get(position).add(new MapEntry<K, V>(key, value));
+		size++;
+		if (this.calculateLoad() > 10) {
+			this.rehash();
+		}
+		
 		return null;
 	}
 
@@ -142,10 +160,16 @@ public class HashTable<K, V> implements Map<K, V>{
 	 * @return the number of mappings in this map
 	 */
 	public int size() {
-		return 0;
+		return this.size;
 	}
 	
 	private double calculateLoad() {
 		return this.size / this.capacity;
+	}
+	
+	private void rehash() {
+		ArrayList<LinkedList<MapEntry<K, V>>> newTable = new ArrayList<LinkedList<MapEntry<K,V>>>();
+		
+		
 	}
 }
