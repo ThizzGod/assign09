@@ -80,6 +80,7 @@ class HashTableTester {
 		booksSold.clear();
 		
 		assertEquals(0, booksSold.size());
+		assertTrue(booksSold.isEmpty());
 	}
 	
 	@Test
