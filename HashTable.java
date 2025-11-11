@@ -130,4 +130,7 @@ public class HashTable<K, V> implements Map<K, V>{
 		return 0;
 	}
 	
+	private double calculateLoad() {
+		return this.size / this.capacity;
+	}
 }
