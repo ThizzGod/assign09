@@ -73,9 +73,10 @@ public class StudentBadHash {
 		return firstName + " " + lastName + " (u" + formatter.format(uid) + ")";
 	}
 
+	/**
+	 * @return a hash code based only on the last digit of the uid
+	 */
 	public int hashCode() {
-		// FILL IN and add method comment
-		
-		return 0;
+		return uid % 10;
 	}
 }
