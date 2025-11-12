@@ -82,11 +82,13 @@ public class HashTable<K, V> implements Map<K, V>{
 	 * @return a List object containing all mapping (i.e., entries) in this map
 	 */
 	public List<MapEntry<K, V>> entries(){
-        List<MapEntry<K, V>> entries = new ArrayList<>();
-        for (LinkedList<MapEntry<K, V>> bucket : table) {
-        	entries.addAll(bucket);
-        }
-        return entries;
+		ArrayList<MapEntry<K, V>> entries = new ArrayList<MapEntry<K,V>>();
+		for (LinkedList<MapEntry<K, V>> list : table) {
+			for (MapEntry<K, V> entry: list) {
+				entries.add(entry);
+			}
+		}
+		return entries;
     }
 
 	/**
@@ -151,7 +153,7 @@ public class HashTable<K, V> implements Map<K, V>{
 		
 		table.get(position).add(new MapEntry<K, V>(key, value));
 		size++;
-		if (this.calculateLoad() > 10) {
+		if (this.calculateLoad() > 1) {
 			this.rehash();
 		}
 		
@@ -207,7 +209,15 @@ public class HashTable<K, V> implements Map<K, V>{
 	 */
 	private void rehash() {
 		ArrayList<LinkedList<MapEntry<K, V>>> newTable = new ArrayList<LinkedList<MapEntry<K,V>>>();
+		capacity *=2;
+		for(int i = 0; i < capacity; i++)
+			newTable.add(new LinkedList<MapEntry<K, V>>());
 		
-		
+		List<MapEntry<K, V>> entries = this.entries();
+		for (MapEntry<K, V> entry: entries ) {
+			int position = Math.abs(entry.getKey().hashCode() % capacity);
+			newTable.get(position).add(entry);
+		}
+		this.table = newTable;
 	}
 }

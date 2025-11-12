@@ -12,6 +12,8 @@ import org.junit.platform.commons.annotation.Testable;
 class HashTableTester {
 	HashTable<String, Integer> booksSold;
 	HashTable<String, Integer> emptyMap;
+	HashTable<Integer, Integer> largeTable;
+	
 	@BeforeEach
 	void setUp() {
 		booksSold = new HashTable<String, Integer>();
@@ -21,6 +23,12 @@ class HashTableTester {
 		booksSold.put("Frankenstein", 80);
 		
 		emptyMap = new HashTable<String, Integer>();
+		
+		largeTable = new HashTable<Integer, Integer>();
+		
+		for (int i = -100; i < 100; i++) {
+			largeTable.put(i, i);
+		}
 	}
 
 	@Test
@@ -100,7 +108,7 @@ class HashTableTester {
 	
 	@Test
 	void testIsEmptyNotEmpty() {
-		assertFalse(emptyMap.isEmpty());
+		assertFalse(booksSold.isEmpty());
 	}
 	
 	@Test
@@ -128,5 +136,14 @@ class HashTableTester {
 	@Test
 	void testGetNoSuchKey() {
 		assertEquals(null, booksSold.get("Catch 22"));
+	}
+	
+	//Set Rehash value to 1 before test
+	
+	@Test
+	void testTableWorksAfterRehash() {
+		assertEquals(-80, largeTable.get(-80));
+		assertEquals(0, largeTable.get(0));
+		assertEquals(null, largeTable.get(100));
 	}
 }
