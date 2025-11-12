@@ -8,8 +8,8 @@ import java.text.DecimalFormat;
  * object, but one that does a poor job of distributing students in a hash
  * table.
  * 
- * @author Erin Parker & ?
- * @version ?
+ * @author Erin Parker & Max Barker & Josi Gac
+ * @version 11/11/25
  */
 public class StudentBadHash {
 
