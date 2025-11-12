@@ -23,5 +23,34 @@ public class StudentHashDemo {
 		
 		for(MapEntry<StudentBadHash, Double> e : studentGpaTable.entries())
 			System.out.println("Student " + e.getKey() + " has GPA " + e.getValue() + ".");
+		
+		StudentMediumHash alanMedium = new StudentMediumHash(1019999, "Alan", "Turing");
+		StudentMediumHash adaMedium = new StudentMediumHash(1004203, "Ada", "Lovelace");
+		StudentMediumHash edsgerMedium = new StudentMediumHash(1010661, "Edsger", "Dijkstra");
+		StudentMediumHash graceMedium = new StudentMediumHash(1019941, "Grace", "Hopper");
+
+		HashTable<StudentMediumHash, Double> studentGpaTableMedium = new HashTable<StudentMediumHash, Double>();
+		studentGpaTableMedium.put(alanMedium, 3.2);
+		studentGpaTableMedium.put(adaMedium, 3.5);
+		studentGpaTableMedium.put(edsgerMedium, 3.8);
+		studentGpaTableMedium.put(graceMedium, 4.0);
+		
+		for(MapEntry<StudentMediumHash, Double> e : studentGpaTableMedium.entries())
+			System.out.println("Student " + e.getKey() + " has GPA " + e.getValue() + ".");
+
+		StudentGoodHash alanGood = new StudentGoodHash(1019999, "Alan", "Turing");
+		StudentGoodHash adaGood = new StudentGoodHash(1004203, "Ada", "Lovelace");
+		StudentGoodHash edsgerGood = new StudentGoodHash(1010661, "Edsger", "Dijkstra");
+		StudentGoodHash graceGood = new StudentGoodHash(1019941, "Grace", "Hopper");
+
+		HashTable<StudentGoodHash, Double> studentGpaTableGood = new HashTable<StudentGoodHash, Double>();
+		studentGpaTableGood.put(alanGood, 3.2);
+		studentGpaTableGood.put(adaGood, 3.5);
+		studentGpaTableGood.put(edsgerGood, 3.8);
+		studentGpaTableGood.put(graceGood, 4.0);
+		
+		for(MapEntry<StudentGoodHash, Double> e : studentGpaTableGood.entries())
+			System.out.println("Student " + e.getKey() + " has GPA " + e.getValue() + ".");
+
 	}
 }
