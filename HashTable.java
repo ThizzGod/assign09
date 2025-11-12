@@ -4,6 +4,14 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
+/**
+ * Represents a hash table that maps keys to values using the separate chaining method
+ * 
+ * @author Max Barker and Josi Gac
+ * @version 11/11/25
+ * @param <K>
+ * @param <V>
+ */
 public class HashTable<K, V> implements Map<K, V>{
 	int size;
 	int capacity;
@@ -55,6 +63,13 @@ public class HashTable<K, V> implements Map<K, V>{
 	 *         false otherwise
 	 */
 	public boolean containsValue(V value) {
+		for (LinkedList<MapEntry<K, V>> bucket : table) {
+		    for (MapEntry<K, V> entry : bucket) {
+		        if (value.equals(entry.getValue())) {
+		            return true;
+		        }
+		    }
+		}
 		return false;
 	}
 
@@ -67,8 +82,12 @@ public class HashTable<K, V> implements Map<K, V>{
 	 * @return a List object containing all mapping (i.e., entries) in this map
 	 */
 	public List<MapEntry<K, V>> entries(){
-		return null;
-	}
+        List<MapEntry<K, V>> entries = new ArrayList<>();
+        for (LinkedList<MapEntry<K, V>> bucket : table) {
+        	entries.addAll(bucket);
+        }
+        return entries;
+    }
 
 	/**
 	 * Gets the value to which the specified key is mapped.
@@ -149,8 +168,19 @@ public class HashTable<K, V> implements Map<K, V>{
 	 *         mapping for key
 	 */
 	public V remove(K key) {
-		return null;
-	}
+        int position = Math.abs(key.hashCode() % capacity);
+        LinkedList<MapEntry<K, V>> bucket = table.get(position);
+
+        for (MapEntry<K, V> entry : bucket) {
+            if (entry.getKey().equals(key)) {
+                V oldValue = entry.getValue();
+                bucket.remove(entry);
+                size--;
+                return oldValue;
+            }
+        }
+        return null;
+    }
 
 	/**
 	 * Determines the number of mappings in this map.
@@ -163,10 +193,18 @@ public class HashTable<K, V> implements Map<K, V>{
 		return this.size;
 	}
 	
+	/**
+	 * Calculates and returns the load factor of the hash table
+	 * 
+	 * @return the load factor
+	 */
 	private double calculateLoad() {
 		return this.size / this.capacity;
 	}
 	
+	/**
+	 * Rebuilds the hash table
+	 */
 	private void rehash() {
 		ArrayList<LinkedList<MapEntry<K, V>>> newTable = new ArrayList<LinkedList<MapEntry<K,V>>>();
 		

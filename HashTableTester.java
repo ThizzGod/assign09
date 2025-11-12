@@ -19,6 +19,8 @@ class HashTableTester {
 		booksSold.put("Blood Meridian", 25);
 		booksSold.put("Children of Dune", 120);
 		booksSold.put("Frankenstein", 80);
+		
+		emptyMap = new HashTable<String, Integer>();
 	}
 
 	@Test
@@ -87,7 +89,8 @@ class HashTableTester {
 	void testClearAlreadyEmpty() {
 		emptyMap.clear();
 		
-		assertEquals(0, booksSold.size());
+	    assertEquals(0, emptyMap.size());
+	    assertTrue(emptyMap.isEmpty());
 	}
 	
 	@Test
