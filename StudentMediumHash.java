@@ -62,9 +62,10 @@ public class StudentMediumHash {
 		return firstName + " " + lastName + " (u" + formatter.format(uid) + ")";
 	}
 
+	/**
+	 * @return sum of uid and last name hash code
+	 */
 	public int hashCode() {
-		// FILL IN and add method comment
-		
-		return 0;
+		return uid + lastName.hashCode();
 	}
 }
