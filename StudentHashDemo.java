@@ -22,7 +22,7 @@ public class StudentHashDemo {
 		studentGpaTable.put(grace, 4.0);
 		
 		for(MapEntry<StudentBadHash, Double> e : studentGpaTable.entries())
-			System.out.println("Student " + e.getKey() + " has GPA " + e.getValue() + ".");
+			System.out.println("Student " + e.getKey() + " has GPA " + e.getValue() + " " + e.getKey().hashCode() + ".");
 		
 		StudentMediumHash alanMedium = new StudentMediumHash(1019999, "Alan", "Turing");
 		StudentMediumHash adaMedium = new StudentMediumHash(1004203, "Ada", "Lovelace");
@@ -36,7 +36,7 @@ public class StudentHashDemo {
 		studentGpaTableMedium.put(graceMedium, 4.0);
 		
 		for(MapEntry<StudentMediumHash, Double> e : studentGpaTableMedium.entries())
-			System.out.println("Student " + e.getKey() + " has GPA " + e.getValue() + ".");
+			System.out.println("Student " + e.getKey() + " has GPA " + e.getValue() + " " + e.getKey().hashCode() +".");
 
 		StudentGoodHash alanGood = new StudentGoodHash(1019999, "Alan", "Turing");
 		StudentGoodHash adaGood = new StudentGoodHash(1004203, "Ada", "Lovelace");
@@ -50,7 +50,7 @@ public class StudentHashDemo {
 		studentGpaTableGood.put(graceGood, 4.0);
 		
 		for(MapEntry<StudentGoodHash, Double> e : studentGpaTableGood.entries())
-			System.out.println("Student " + e.getKey() + " has GPA " + e.getValue() + ".");
+			System.out.println("Student " + e.getKey() + " has GPA " + e.getValue() + " " + e.getKey().hashCode() + "." );
 
 	}
 }

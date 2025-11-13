@@ -46,7 +46,6 @@ public class StudentGoodHash {
 	 * @return true if this student and 'other' have the same UID, first name, and last name; false otherwise
 	 */
 	public boolean equals(Object other) {
-		// change to StudentMediumHash and StudentGoodHash for two new classes
 		if(!(other instanceof StudentGoodHash))
 			return false;
 
@@ -64,8 +63,6 @@ public class StudentGoodHash {
 	}
 
 	public int hashCode() {
-		// FILL IN and add method comment
-		
-		return 0;
+		return (int)Math.pow(uid, 2) * firstName.hashCode() * lastName.hashCode();
 	}
 }
